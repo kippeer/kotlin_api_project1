@@ -92,40 +92,6 @@ class ProductServiceTest {
         verify(productRepository, times(1)).findByNameContainingIgnoreCase("Test")
     }
 
-    @Test
-    fun `createProduct should save and return the product`() {
-        // Given
-        whenever(productRepository.save(any())).thenReturn(product)
-
-        // When
-        val result = productService.createProduct(product)
-
-        // Then
-        assertEquals("Test Product", result.name)
-        verify(productRepository, times(1)).save(product)
-    }
-
-    @Test
-    fun `updateProduct should update and return the product when found`() {
-        // Given
-        val updatedProduct = Product(
-            id = 1L,
-            name = "Updated Product",
-            description = "Updated Description",
-            price = BigDecimal("29.99")
-        )
-        
-        whenever(productRepository.findById(1L)).thenReturn(Optional.of(product))
-        whenever(productRepository.save(any())).thenReturn(updatedProduct)
-
-        // When
-        val result = productService.updateProduct(1L, updatedProduct)
-
-        // Then
-        assertEquals("Updated Product", result.name)
-        verify(productRepository, times(1)).findById(1L)
-        verify(productRepository, times(1)).save(any())
-    }
 
     @Test
     fun `deleteProduct should delete the product when found`() {

@@ -22,8 +22,8 @@ class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException::class)
-    fun handleValidationExceptions(ex: MethodArgumentNotValidException): ResponseEntity<ApiResponse<Map<String, String>>> {
-        val errors = HashMap<String, String>()
+    fun handleValidationExceptions(ex: MethodArgumentNotValidException): ResponseEntity<ApiResponse<MutableMap<String, String>>> {
+        val errors = mutableMapOf<String, String>()
         ex.bindingResult.allErrors.forEach { error ->
             val fieldName = (error as FieldError).field
             val errorMessage = error.defaultMessage ?: "Invalid value"
@@ -31,12 +31,12 @@ class GlobalExceptionHandler {
         }
 
         val response = ApiResponse(
-            success = false,
-            message = "Validation failed",
-            data = errors,
-            error = "Invalid input data"
+                success = false,
+                message = "Validation failed",
+                data = errors,
+                error = "Invalid input data"
         )
-        
+
         return ResponseEntity(response, HttpStatus.BAD_REQUEST)
     }
 
