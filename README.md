@@ -94,9 +94,7 @@ src
                     └── service
 ```
 
-## Development Process
 
-For details on the development process and completed tasks, see [GITFLOW.md](GITFLOW.md).
 
 ## License
 
