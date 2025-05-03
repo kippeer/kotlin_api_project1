@@ -1,0 +1,13 @@
+{
+  "name": "product-management-api",
+  "private": true,
+  "scripts": {
+    "start": "mvn spring-boot:run",
+    "build": "mvn clean package",
+    "test": "mvn test",
+    "docker:build": "docker build -t product-api .",
+    "docker:run": "docker run -p 8080:8080 product-api",
+    "docker:compose": "docker-compose up -d",
+    "docker:down": "docker-compose down"
+  }
+}
